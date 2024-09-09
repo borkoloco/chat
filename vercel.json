@@ -1,15 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "chat-app/package.json",
-      "use": "@vercel/static-build"
-    },
-    {
-      "src": "chat-backend/index.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
