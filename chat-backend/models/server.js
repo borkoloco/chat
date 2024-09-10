@@ -27,14 +27,8 @@ class Server {
 
   middlewares() {
     // TODO CORS
-    this.app.use(cors());
-    // this.app.use(
-    //   cors({
-    //     origin: "https://chat-app-pink-two.vercel.app", // URL de tu frontend
-    //     methods: "GET,POST,PUT,DELETE", // Permitir los métodos que necesitas
-    //     credentials: true, // Permitir credenciales si es necesario
-    //   })
-    // );
+    this.app.options("*", cors()); // Maneja todas las solicitudes preflight
+    this.app.use(cors()); // Habilita CORS para todas las rutas
 
     // Desplegar el directorio público
     this.app.use(express.static(path.resolve(__dirname, "../public")));
