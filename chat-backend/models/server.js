@@ -30,7 +30,14 @@ class Server {
     this.app.use(express.static(path.resolve(__dirname, "../public")));
 
     //TODO CORS
-    this.app.use(cors());
+    // this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: "https://chat-app-pink-two.vercel.app", // URL de tu frontend
+        methods: "GET,POST,PUT,DELETE", // Permitir los métodos que necesitas
+        credentials: true, // Permitir credenciales si es necesario
+      })
+    );
 
     //parseo del body...transforma el body a json
 
