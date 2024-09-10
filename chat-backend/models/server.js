@@ -29,12 +29,23 @@ class Server {
     // TODO CORS
     this.app.use(cors());
 
-    const safelist = ["*"];
-    const corsOptions = {
-      origin: safelist,
-    };
+    this.app.use((req, res, next) => {
+      console.log(
+        `Request: ${req.method} ${req.url} from origin ${req.headers.origin}`
+      );
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-    this.app.use(cors(corsOptions));
+      if (req.method === "OPTIONS") {
+        return res.status(200).end();
+      }
+
+      next();
+    });
 
     // Desplegar el directorio público
     this.app.use(express.static(path.resolve(__dirname, "../public")));
