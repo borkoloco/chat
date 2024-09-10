@@ -20,14 +20,31 @@ class Server {
     this.server = http.createServer(this.app);
 
     // Configuraciones de sockets
+    // this.io = socketio(this.server, {
+    //   /* configuraciones */
+    // });
     this.io = socketio(this.server, {
-      /* configuraciones */
+      cors: {
+        origin: "*", // Puedes reemplazar "*" por el dominio específico de tu frontend si es necesario
+        methods: ["GET", "POST"],
+        credentials: true,
+      },
+      transports: ["websocket", "polling"], // Permite tanto websocket como polling
     });
   }
 
   middlewares() {
     // TODO CORS
-    this.app.use(cors());
+    // this.app.use(cors());
+
+    this.app.use(
+      cors({
+        origin: "https://chat-app-pink-two.vercel.app", // Permite solo solicitudes desde tu dominio en Vercel
+        methods: ["GET", "POST", "OPTIONS"], // Define los métodos permitidos
+        allowedHeaders: ["Content-Type", "Authorization"], // Define los encabezados permitidos
+        credentials: true, // Permite el envío de cookies/credenciales
+      })
+    );
 
     this.app.use((req, res, next) => {
       res.header("Access-Control-Allow-Origin", "*");
