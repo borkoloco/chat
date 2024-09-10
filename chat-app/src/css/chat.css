@@ -234,3 +234,101 @@ textarea {
   width: 60%;
   text-align: center;
 }
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .inbox_people,
+  .mesgs {
+    width: 100%;
+    float: none;
+    height: auto;
+  }
+
+  .inbox_people {
+    border-right: none;
+    height: 50vh; /* Ocupa la mitad de la pantalla */
+  }
+
+  .mesgs {
+    height: 50vh; /* Ocupa la otra mitad de la pantalla */
+    padding: 15px;
+  }
+
+  .recent_heading {
+    width: 100%;
+  }
+
+  .srch_bar {
+    width: 100%;
+    text-align: left;
+  }
+
+  .chat_ib {
+    width: 70%;
+  }
+
+  .chat_img {
+    width: 15%;
+  }
+
+  .received_msg,
+  .sent_msg {
+    width: 100%;
+  }
+
+  .received_withd_msg {
+    width: 100%;
+  }
+
+  .sent_msg {
+    width: 100%;
+  }
+
+  .msg_send_btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .input_msg_write input {
+    font-size: 14px;
+    min-height: 40px;
+  }
+
+  .extra_space {
+    height: 50px;
+  }
+
+  .middle-screen {
+    width: 100%;
+    top: 30%;
+    right: 0;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas (móviles) */
+@media (max-width: 480px) {
+  .chat_ib {
+    width: 60%;
+  }
+
+  .chat_img {
+    width: 20%;
+  }
+
+  .msg_send_btn {
+    width: 100%;
+    height: 40px;
+  }
+
+  .input_msg_write input {
+    min-height: 40px;
+  }
+
+  .inbox_chat {
+    height: auto;
+  }
+
+  .mesgs {
+    padding: 10px;
+  }
+}
