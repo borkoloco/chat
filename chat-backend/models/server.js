@@ -29,22 +29,17 @@ class Server {
     // TODO CORS
     this.app.use(cors());
 
-    this.app.use((req, res, next) => {
-      console.log(
-        `Request: ${req.method} ${req.url} from origin ${req.headers.origin}`
+    this.app.options("*", (req, res) => {
+      res.header(
+        "Access-Control-Allow-Origin",
+        "https://chat-app-pink-two.vercel.app"
       );
-      res.header("Access-Control-Allow-Origin", "*");
       res.header(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, OPTIONS"
       );
       res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-      if (req.method === "OPTIONS") {
-        return res.status(200).end();
-      }
-
-      next();
+      res.sendStatus(200);
     });
 
     // Desplegar el directorio público
