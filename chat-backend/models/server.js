@@ -27,14 +27,33 @@ class Server {
 
   middlewares() {
     // TODO CORS
-    const corsOptions = {
-      origin: "https://chat-app-pink-two.vercel.app",
-      methods: ["GET", "POST"],
-      allowedHeaders: ["Content-Type", "Authorization"],
-    };
-    this.app.use(cors(corsOptions));
+    // this.app.use(cors());
+    //----------------------------------------------------
+    // Permitir solicitudes desde tu frontend específico
+    this.app.use(
+      cors({
+        origin: "https://chat-app-pink-two.vercel.app", // El origen del frontend
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Métodos permitidos
+        credentials: true, // Permitir credenciales si es necesario (cookies, etc.)
+      })
+    );
 
-    // app.use(cors());
+    // Asegurarse de que las solicitudes OPTIONS sean manejadas
+    this.app.options("*", cors());
+    this.app.options("*", (req, res) => {
+      res.set(
+        "Access-Control-Allow-Origin",
+        "https://chat-app-pink-two.vercel.app"
+      );
+      res.set(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+      res.set("Access-Control-Allow-Credentials", "true");
+      res.sendStatus(204); // Responder con éxito sin contenido para OPTIONS
+    });
+    //----------------------------------------------------------
 
     // Desplegar el directorio público
     this.app.use(express.static(path.resolve(__dirname, "../public")));
