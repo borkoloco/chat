@@ -32,7 +32,7 @@ class Server {
       methods: ["GET", "POST"],
       allowedHeaders: ["Content-Type", "Authorization"],
     };
-    app.use(cors(corsOptions));
+    this.app.use(cors(corsOptions));
 
     // app.use(cors());
 
