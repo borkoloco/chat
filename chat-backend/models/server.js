@@ -29,6 +29,13 @@ class Server {
     // TODO CORS
     this.app.use(cors());
 
+    const safelist = ["*"];
+    const corsOptions = {
+      origin: safelist,
+    };
+
+    this.app.use(cors(corsOptions));
+
     // Desplegar el directorio público
     this.app.use(express.static(path.resolve(__dirname, "../public")));
 
