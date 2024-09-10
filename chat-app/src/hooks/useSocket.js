@@ -13,7 +13,8 @@ export const useSocket = (serverPath) => {
     const token = localStorage.getItem("token");
 
     const socketTemp = io.connect(serverPath, {
-      transports: ["websocket"],
+      // transports: ["websocket"],
+      transports: ["polling"],
       autoConnect: true,
       forceNew: true,
       //de esta forma envio el token
