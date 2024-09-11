@@ -10,9 +10,9 @@ export const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
   const { socket, online, conectarSocket, desconectarSocket } = useSocket(
-    "https://chat-backend-psi-lime.vercel.app"
+    // "https://chat-backend-psi-lime.vercel.app"
 
-    // process.env.REACT_APP_BACK_URL
+    process.env.REACT_APP_BACK_URL
   );
   const { auth } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
